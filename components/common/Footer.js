@@ -5,6 +5,7 @@ import { HiOutlineClipboardCopy } from "react-icons/hi"
 import { useState, useEffect } from "react"
 import { appointmentHref } from "@/assets/data/offers"
 import BrandLogo from "./BrandLogo"
+import BrandName from "./BrandName"
 
 const Footer = () => {
   const [phoneCopied, setPhoneCopied] = useState(false)
@@ -132,7 +133,9 @@ const Footer = () => {
           </div>
           <div className='legal connect py'>
             <div className='text'>
-              <span>© {currentYear} CodeMadeBiz. ALL RIGHTS RESERVED.</span>
+              <span>
+                © {currentYear} <BrandName />. ALL RIGHTS RESERVED.
+              </span>
             </div>
             <div className='connect'>
               <Link href='/privacy'>PRIVACY POLICY</Link>

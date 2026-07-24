@@ -1,8 +1,16 @@
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { useChat } from "ai/react"
-import { HiOutlineChatAlt2, HiOutlineX, HiOutlinePaperAirplane } from "react-icons/hi"
+import { HiOutlineChatAlt2, HiOutlineX, HiOutlinePaperAirplane, HiOutlineMail, HiOutlineClipboardCopy } from "react-icons/hi"
+import { FaWhatsapp } from "react-icons/fa"
 import { appointmentHref } from "@/assets/data/offers"
+import BrandName from "@/components/common/BrandName"
+
+const CONTACT_PHONE = "+918762363186"
+const CONTACT_PHONE_DISPLAY = "+91 8762363186"
+const CONTACT_EMAIL = "contact@codemadebiz.com"
+const WHATSAPP_HREF = `https://wa.me/${CONTACT_PHONE.replace("+", "")}`
+const MAIL_HREF = `mailto:${CONTACT_EMAIL}`
 
 const GREETING =
   "Hi — I’m here to help you explore CodeMadeBiz services (software, AI, websites & CRM, MVPs). What’s your name, and what kind of business are you running?"
@@ -15,16 +23,27 @@ const QUICK_REPLIES = [
   { label: "Talk to a human", text: "I’d like to talk to a human and book a consultation.", intent: "default" },
 ]
 
-function detectIntent(text = "") {
+function detectAppointmentIntent(text = "") {
   const match = text.match(/\/appointment\?intent=([a-z]+)/i)
-  if (match?.[1]) return match[1]
+  return match?.[1] || null
+}
+
+function recommendsHumanContact(text = "") {
+  if (!text) return false
   const lower = text.toLowerCase()
-  if (/\bmvp\b|startup product/.test(lower)) return "mvp"
-  if (/website\s*\+?\s*crm|crm dashboard|lead pipeline/.test(lower)) return "webcrm"
-  if (/\benterprise\b|custom tools|internal platform/.test(lower)) return "enterprise"
-  if (/\bai\b|growth stack|support agent|social media/.test(lower)) return "ai"
-  if (/launch|growth|scale|software plan/.test(lower)) return "software"
-  return null
+  return (
+    /\/appointment/i.test(text) ||
+    /wa\.me\//i.test(text) ||
+    /mailto:/i.test(text) ||
+    /book a consultation/i.test(lower) ||
+    /book consultation/i.test(lower) ||
+    /talk to (a |our )?human/i.test(lower) ||
+    /speak (with|to) (our|a|the) (team|human)/i.test(lower) ||
+    /reach (us|our team)/i.test(lower) ||
+    /whatsapp/i.test(lower) ||
+    /contact@codemadebiz\.com/i.test(lower) ||
+    /\+91\s*8762363186/i.test(text)
+  )
 }
 
 function renderInline(text, keyPrefix) {
@@ -77,6 +96,9 @@ function renderMessageContent(content) {
 const ChatWidget = () => {
   const [open, setOpen] = useState(false)
   const [intent, setIntent] = useState(null)
+  const [showContactCta, setShowContactCta] = useState(false)
+  const [phoneCopied, setPhoneCopied] = useState(false)
+  const [emailCopied, setEmailCopied] = useState(false)
   const listRef = useRef(null)
 
   const { messages, input, handleInputChange, handleSubmit, append, isLoading, error, setMessages } = useChat({
@@ -88,12 +110,14 @@ const ChatWidget = () => {
     if (!open) return
     const el = listRef.current
     if (el) el.scrollTop = el.scrollHeight
-  }, [messages, open, isLoading])
+  }, [messages, open, isLoading, showContactCta])
 
   useEffect(() => {
     const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant")
-    const found = detectIntent(lastAssistant?.content || "")
-    if (found) setIntent(found)
+    const content = lastAssistant?.content || ""
+    const foundIntent = detectAppointmentIntent(content)
+    if (foundIntent) setIntent(foundIntent)
+    if (recommendsHumanContact(content)) setShowContactCta(true)
   }, [messages])
 
   const bookHref = useMemo(() => appointmentHref(intent && intent !== "default" ? intent : null), [intent])
@@ -105,13 +129,36 @@ const ChatWidget = () => {
   }, [isLoading, messages])
 
   const onQuickReply = async (reply) => {
-    setIntent(reply.intent === "default" ? null : reply.intent)
+    if (reply.intent === "default") {
+      setShowContactCta(true)
+      setIntent(null)
+    } else {
+      setIntent(reply.intent)
+    }
     await append({ role: "user", content: reply.text })
   }
 
   const resetChat = () => {
     setIntent(null)
+    setShowContactCta(false)
+    setPhoneCopied(false)
+    setEmailCopied(false)
     setMessages([{ id: "greeting", role: "assistant", content: GREETING }])
+  }
+
+  const copyContact = async (text, type) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      if (type === "phone") {
+        setPhoneCopied(true)
+        setTimeout(() => setPhoneCopied(false), 2000)
+      } else {
+        setEmailCopied(true)
+        setTimeout(() => setEmailCopied(false), 2000)
+      }
+    } catch {
+      // Clipboard may be blocked; ignore quietly
+    }
   }
 
   return (
@@ -120,7 +167,9 @@ const ChatWidget = () => {
         <div className='chat-panel' role='dialog' aria-label='CodeMadeBiz chat assistant'>
           <div className='chat-panel-header'>
             <div>
-              <p className='chat-eyebrow'>CodeMadeBiz</p>
+              <p className='chat-eyebrow'>
+                <BrandName />
+              </p>
               <strong>Help & guidance</strong>
             </div>
             <div className='chat-header-actions'>
@@ -142,10 +191,18 @@ const ChatWidget = () => {
             {showTyping && <div className='chat-bubble chat-assistant chat-typing'>Thinking…</div>}
             {error && (
               <div className='chat-bubble chat-error'>
-                {error.message?.includes("API key") || error.message?.includes("not configured")
-                  ? "Chat isn’t configured yet. "
-                  : "Sorry — chat hit a snag. "}
-                You can still <Link href='/appointment'>book a consultation</Link>.
+                {/rate-limited|quota|429/i.test(error.message || "")
+                  ? "Chat is busy right now (free AI limit). Wait about a minute and try again — or "
+                  : error.message?.includes("API key") || error.message?.includes("not configured")
+                    ? "Chat isn’t configured yet. "
+                    : "Sorry — chat hit a snag. "}
+                <Link href='/appointment'>book a consultation</Link>
+                {", "}
+                <a href={WHATSAPP_HREF} target='_blank' rel='noopener noreferrer'>
+                  WhatsApp
+                </a>
+                {", or "}
+                <a href={MAIL_HREF}>{CONTACT_EMAIL}</a>.
               </div>
             )}
           </div>
@@ -160,11 +217,47 @@ const ChatWidget = () => {
             </div>
           )}
 
-          <div className='chat-cta-bar'>
-            <Link href={bookHref} className='button-primary chat-book-btn'>
-              Book consultation
-            </Link>
-          </div>
+          {showContactCta && (
+            <div className='chat-cta-bar'>
+              <Link href={bookHref} className='button-primary chat-book-btn'>
+                Book consultation
+              </Link>
+              <div className='chat-contact-links'>
+                <div className='chat-contact-item'>
+                  <a href={WHATSAPP_HREF} target='_blank' rel='noopener noreferrer' className='chat-contact-link'>
+                    <FaWhatsapp size={14} aria-hidden />
+                    <span>WhatsApp {CONTACT_PHONE_DISPLAY}</span>
+                  </a>
+                  <button
+                    type='button'
+                    className='chat-copy-btn'
+                    onClick={() => copyContact(CONTACT_PHONE_DISPLAY, "phone")}
+                    aria-label='Copy phone number'
+                    title='Copy phone number'
+                  >
+                    <HiOutlineClipboardCopy size={15} />
+                    {phoneCopied && <span className='chat-copied-tip'>Copied!</span>}
+                  </button>
+                </div>
+                <div className='chat-contact-item'>
+                  <a href={MAIL_HREF} className='chat-contact-link'>
+                    <HiOutlineMail size={14} aria-hidden />
+                    <span>{CONTACT_EMAIL}</span>
+                  </a>
+                  <button
+                    type='button'
+                    className='chat-copy-btn'
+                    onClick={() => copyContact(CONTACT_EMAIL, "email")}
+                    aria-label='Copy email'
+                    title='Copy email'
+                  >
+                    <HiOutlineClipboardCopy size={15} />
+                    {emailCopied && <span className='chat-copied-tip'>Copied!</span>}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           <form className='chat-input-row' onSubmit={handleSubmit}>
             <input
@@ -179,7 +272,7 @@ const ChatWidget = () => {
               <span>Send</span>
             </button>
           </form>
-          <p className='chat-disclaimer'>For quotes and project scoping, book a consultation.</p>
+          {showContactCta && <p className='chat-disclaimer'>Pick a channel above to reach the team.</p>}
         </div>
       )}
 

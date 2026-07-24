@@ -12,6 +12,7 @@ import { BlogCard } from "@/components/router"
 import { Products } from "@/sections"
 import Link from "next/link"
 import { appointmentHref } from "@/assets/data/offers"
+import BrandName from "@/components/common/BrandName"
 import React from "react"
 
 const Hero = () => {
@@ -19,9 +20,7 @@ const Hero = () => {
     <>
       <section className='hero'>
         <div className='container'>
-          <p className='hero-brand-text'>
-            <span>CodeMade</span>Biz
-          </p>
+          <BrandName className='hero-brand-text' as='p' />
           <h1 className='hero-title'>SOFTWARE, AI & MARKETING FOR SMBs & STARTUPS</h1>
 
           <div className='sub-heading'>

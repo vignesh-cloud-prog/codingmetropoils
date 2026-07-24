@@ -9,7 +9,14 @@ export const config = {
 }
 
 const MAX_MESSAGES = 40
-const MODEL = process.env.GOOGLE_GENERATIVE_AI_MODEL || "gemini-flash-latest"
+// Prefer flash-lite for free-tier RPM/RPD headroom; override via env if needed.
+const MODEL = process.env.GOOGLE_GENERATIVE_AI_MODEL || "gemini-flash-lite-latest"
+const FALLBACK_MODELS = ["gemini-2.5-flash-lite", "gemini-flash-latest"]
+
+function isQuotaError(error) {
+  const message = String(error?.message || error || "")
+  return /quota|rate.?limit|429|resource.?exhausted/i.test(message)
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -39,22 +46,48 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Empty message." })
   }
 
-  try {
-    const google = createGoogleGenerativeAI({ apiKey })
-    const result = streamText({
-      model: google(MODEL),
-      system: buildSystemPrompt(),
-      messages: trimmed,
-      temperature: 0.55,
-      maxTokens: 900,
-    })
+  const google = createGoogleGenerativeAI({ apiKey })
+  const models = [MODEL, ...FALLBACK_MODELS.filter((m) => m !== MODEL)]
 
-    result.pipeDataStreamToResponse(res, {
-      getErrorMessage: (error) => {
-        const message = error?.message || "Chat failed. Please try again or book a consultation."
-        console.error("[api/chat]", message)
-        return message
-      },
+  try {
+    let lastError = null
+
+    for (const modelName of models) {
+      try {
+        const result = streamText({
+          model: google(modelName),
+          system: buildSystemPrompt(),
+          messages: trimmed,
+          temperature: 0.55,
+          maxTokens: 700,
+          maxRetries: 0,
+        })
+
+        return result.pipeDataStreamToResponse(res, {
+          getErrorMessage: (error) => {
+            const message = error?.message || "Chat failed. Please try again or book a consultation."
+            console.error("[api/chat]", modelName, message)
+            if (isQuotaError(error)) {
+              return "Chat is temporarily rate-limited. Please wait about a minute, or book a consultation / WhatsApp us."
+            }
+            return message
+          },
+        })
+      } catch (error) {
+        lastError = error
+        console.error("[api/chat] model failed", modelName, error?.message || error)
+        if (!isQuotaError(error)) break
+      }
+    }
+
+    if (isQuotaError(lastError)) {
+      return res.status(429).json({
+        error: "Chat is temporarily rate-limited. Please wait about a minute, or book a consultation / WhatsApp us.",
+      })
+    }
+
+    return res.status(500).json({
+      error: lastError?.message || "Chat failed. Please try again or book a consultation.",
     })
   } catch (error) {
     console.error("[api/chat]", error)

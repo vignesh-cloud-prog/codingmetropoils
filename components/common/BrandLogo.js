@@ -1,4 +1,5 @@
 import Link from "next/link"
+import BrandName from "./BrandName"
 
 const sizes = {
   sm: { width: 32, height: 32 },
@@ -19,11 +20,7 @@ export const BrandLogo = ({ size = "md", withWordmark = false, href = "/", class
         loading={priority ? "eager" : "lazy"}
         decoding='async'
       />
-      {withWordmark && (
-        <span className='brand-wordmark'>
-          <span className='brand-caption'>CodeMade</span>Biz
-        </span>
-      )}
+      {withWordmark && <BrandName className='brand-wordmark' />}
     </span>
   )
 
