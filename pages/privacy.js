@@ -29,7 +29,10 @@ const PrivacyPolicy = () => {
             <p>We may collect:</p>
             <ul>
               <li>
-                <strong>Contact details</strong> you provide (name, email, phone, company, project details) via forms, WhatsApp, email, or consultation requests.
+                <strong>Contact details</strong> you provide (name, email, phone, company, project details) via forms, WhatsApp, email, consultation requests, or our on-site AI chat assistant.
+              </li>
+              <li>
+                <strong>Chat messages</strong> you send through the website assistant (used to understand your requirements and guide you to the right offer or consultation).
               </li>
               <li>
                 <strong>Usage data</strong> such as pages visited, device/browser type, approximate location, and referral source through analytics tools.
@@ -43,6 +46,7 @@ const PrivacyPolicy = () => {
             <p>We use information to:</p>
             <ul>
               <li>Respond to inquiries and book consultations</li>
+              <li>Power our on-site AI assistant so it can qualify needs and recommend relevant services</li>
               <li>Prepare proposals and deliver contracted services</li>
               <li>Improve our website, offers, and customer experience</li>
               <li>Send service-related updates (and marketing only if you opt in or as permitted by law)</li>
@@ -51,7 +55,7 @@ const PrivacyPolicy = () => {
 
             <h2>3. Sharing of information</h2>
             <p>
-              We do not sell your personal information. We may share data with trusted processors who help us operate (for example hosting, analytics, form providers, or communication tools), under appropriate confidentiality and security expectations. We may also disclose information if required by law or to protect against fraud or security threats.
+              We do not sell your personal information. We may share data with trusted processors who help us operate (for example hosting, analytics, form providers, communication tools, or AI model providers such as Google Gemini used to generate chat assistant replies), under appropriate confidentiality and security expectations. Messages you type in the chat assistant may be sent to that AI provider to generate a response. We may also disclose information if required by law or to protect against fraud or security threats.
             </p>
 
             <h2>4. Cookies and analytics</h2>
