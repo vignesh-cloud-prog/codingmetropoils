@@ -5,6 +5,8 @@ import { HiOutlineChatAlt2, HiOutlineX, HiOutlinePaperAirplane, HiOutlineMail, H
 import { FaWhatsapp } from "react-icons/fa"
 import { appointmentHref } from "@/assets/data/offers"
 import BrandName from "@/components/common/BrandName"
+import ConsultationLink from "@/components/common/ConsultationLink"
+import { trackEmail, trackEvent, trackWhatsApp } from "@/lib/analytics"
 
 const CONTACT_PHONE = "+918762363186"
 const CONTACT_PHONE_DISPLAY = "+91 8762363186"
@@ -100,6 +102,7 @@ const ChatWidget = () => {
   const [phoneCopied, setPhoneCopied] = useState(false)
   const [emailCopied, setEmailCopied] = useState(false)
   const listRef = useRef(null)
+  const contactShownTracked = useRef(false)
 
   const { messages, input, handleInputChange, handleSubmit, append, isLoading, error, setMessages } = useChat({
     api: "/api/chat",
@@ -119,6 +122,12 @@ const ChatWidget = () => {
     if (foundIntent) setIntent(foundIntent)
     if (recommendsHumanContact(content)) setShowContactCta(true)
   }, [messages])
+
+  useEffect(() => {
+    if (!showContactCta || contactShownTracked.current) return
+    contactShownTracked.current = true
+    trackEvent("chat_contact_shown")
+  }, [showContactCta])
 
   const bookHref = useMemo(() => appointmentHref(intent && intent !== "default" ? intent : null), [intent])
 
@@ -143,7 +152,21 @@ const ChatWidget = () => {
     setShowContactCta(false)
     setPhoneCopied(false)
     setEmailCopied(false)
+    contactShownTracked.current = false
     setMessages([{ id: "greeting", role: "assistant", content: GREETING }])
+  }
+
+  const openChat = () => {
+    setOpen(true)
+    trackEvent("chat_opened")
+  }
+
+  const toggleChat = () => {
+    if (open) {
+      setOpen(false)
+      return
+    }
+    openChat()
   }
 
   const copyContact = async (text, type) => {
@@ -219,12 +242,18 @@ const ChatWidget = () => {
 
           {showContactCta && (
             <div className='chat-cta-bar'>
-              <Link href={bookHref} className='button-primary chat-book-btn'>
+              <ConsultationLink href={bookHref} intent={intent || "default"} location='chat' className='button-primary chat-book-btn'>
                 Book consultation
-              </Link>
+              </ConsultationLink>
               <div className='chat-contact-links'>
                 <div className='chat-contact-item'>
-                  <a href={WHATSAPP_HREF} target='_blank' rel='noopener noreferrer' className='chat-contact-link'>
+                  <a
+                    href={WHATSAPP_HREF}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='chat-contact-link'
+                    onClick={() => trackWhatsApp("chat")}
+                  >
                     <FaWhatsapp size={14} aria-hidden />
                     <span>WhatsApp {CONTACT_PHONE_DISPLAY}</span>
                   </a>
@@ -240,7 +269,7 @@ const ChatWidget = () => {
                   </button>
                 </div>
                 <div className='chat-contact-item'>
-                  <a href={MAIL_HREF} className='chat-contact-link'>
+                  <a href={MAIL_HREF} className='chat-contact-link' onClick={() => trackEmail("chat")}>
                     <HiOutlineMail size={14} aria-hidden />
                     <span>{CONTACT_EMAIL}</span>
                   </a>
@@ -279,7 +308,7 @@ const ChatWidget = () => {
       <button
         type='button'
         className='chat-launcher'
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggleChat}
         aria-expanded={open}
         aria-label={open ? "Close chat" : "Open chat with CodeMadeBiz"}
       >

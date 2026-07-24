@@ -1,8 +1,8 @@
 import React from "react"
-import Link from "next/link"
 import { appointmentHref } from "@/assets/data/offers"
+import ConsultationLink from "@/components/common/ConsultationLink"
 
-const Banner = ({ intent, title, subtitle, cta }) => {
+const Banner = ({ intent, title, subtitle, cta, trackLocation = "banner" }) => {
   return (
     <>
       <section className='banner'>
@@ -16,9 +16,14 @@ const Banner = ({ intent, title, subtitle, cta }) => {
             </p>
           </div>
           <div className='banner-action'>
-            <Link href={appointmentHref(intent)} className='banner-cta'>
+            <ConsultationLink
+              href={appointmentHref(intent)}
+              intent={intent || "default"}
+              location={trackLocation}
+              className='banner-cta'
+            >
               {cta || "Book a consultation"}
-            </Link>
+            </ConsultationLink>
           </div>
         </div>
       </section>

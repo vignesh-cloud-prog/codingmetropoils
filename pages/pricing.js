@@ -3,6 +3,7 @@ import { Title, TitleSm } from "@/components/common/Title"
 import SoftwarePlans from "@/components/SoftwarePlans"
 import Banner from "@/components/Banner"
 import { Seo } from "@/components/common/Seo"
+import ConsultationLink from "@/components/common/ConsultationLink"
 import { appointmentHref } from "@/assets/data/offers"
 
 const PricingPage = () => {
@@ -34,9 +35,9 @@ const PricingPage = () => {
               Buy against scope, not ambiguity. Book a consultation for a quote mapped to Launch, Growth, or Scale — then add AI social, sales, or support when you need run-time help.
             </p>
             <div className='offer-actions' style={{ marginTop: 30 }}>
-              <Link href={appointmentHref("software")} className='button-primary'>
+              <ConsultationLink href={appointmentHref("software")} intent='software' location='pricing' className='button-primary'>
                 Book a consultation
-              </Link>
+              </ConsultationLink>
               <Link href='/ai' className='button-primary secondary-cta'>
                 See AI retainers
               </Link>
@@ -45,7 +46,7 @@ const PricingPage = () => {
         </div>
       </section>
       <SoftwarePlans showHeading={false} />
-      <Banner intent='software' title='Not sure which plan fits?' cta='Book a consultation' />
+      <Banner intent='software' title='Not sure which plan fits?' cta='Book a consultation' trackLocation='banner' />
     </>
   )
 }

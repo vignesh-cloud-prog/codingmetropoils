@@ -60,7 +60,7 @@ const PrivacyPolicy = () => {
 
             <h2>4. Cookies and analytics</h2>
             <p>
-              Our site may use cookies or similar technologies to understand traffic and improve performance. You can control cookies through your browser settings. Disabling cookies may affect some site features.
+              Our site uses Google Analytics 4 (GA4) and may use cookies or similar technologies to understand traffic, page performance, and conversion actions (such as consultation intent). You can control cookies through your browser settings. Disabling cookies may affect some site features and analytics accuracy.
             </p>
 
             <h2>5. Data retention</h2>

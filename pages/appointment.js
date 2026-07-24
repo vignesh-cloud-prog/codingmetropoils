@@ -3,12 +3,15 @@ import { useRouter } from "next/router"
 import { TitleSm, Title } from "@/components/common/Title"
 import { Seo } from "@/components/common/Seo"
 import { intentLabels } from "@/assets/data/offers"
+import { trackEvent } from "@/lib/analytics"
 
 export default function Appointment() {
   const router = useRouter()
   const [iframeHeight, setIframeHeight] = useState(900)
   const [loadForm, setLoadForm] = useState(false)
   const formRef = useRef(null)
+  const viewedRef = useRef(false)
+  const formStartedRef = useRef(false)
   const intent = typeof router.query.intent === "string" ? router.query.intent : "default"
   const label = intentLabels[intent] || intentLabels.default
 
@@ -17,6 +20,20 @@ export default function Appointment() {
       ? `https://form.jotform.com/241935017318455?isIframeEmbed=1&intent=${encodeURIComponent(intent)}`
       : "https://form.jotform.com/241935017318455?isIframeEmbed=1"
 
+  useEffect(() => {
+    if (!router.isReady || viewedRef.current) return
+    viewedRef.current = true
+    trackEvent("appointment_viewed", { intent: intent || "default" })
+  }, [router.isReady, intent])
+
+  const startForm = () => {
+    setLoadForm(true)
+    if (!formStartedRef.current) {
+      formStartedRef.current = true
+      trackEvent("form_started", { intent: intent || "default" })
+    }
+  }
+
   // Load iframe only when the form area is near the viewport
   useEffect(() => {
     if (loadForm || !formRef.current) return undefined
@@ -24,7 +41,7 @@ export default function Appointment() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          setLoadForm(true)
+          startForm()
           observer.disconnect()
         }
       },
@@ -33,7 +50,7 @@ export default function Appointment() {
 
     observer.observe(formRef.current)
     return () => observer.disconnect()
-  }, [loadForm])
+  }, [loadForm, intent])
 
   useEffect(() => {
     if (!loadForm) return undefined
@@ -82,7 +99,7 @@ export default function Appointment() {
             {!loadForm ? (
               <div className='jotform-placeholder'>
                 <p>Consultation form loads when you are ready — keeps this page fast.</p>
-                <button type='button' className='button-primary' onClick={() => setLoadForm(true)}>
+                <button type='button' className='button-primary' onClick={startForm}>
                   Load consultation form
                 </button>
               </div>

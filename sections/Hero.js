@@ -13,6 +13,7 @@ import { Products } from "@/sections"
 import Link from "next/link"
 import { appointmentHref } from "@/assets/data/offers"
 import BrandName from "@/components/common/BrandName"
+import ConsultationLink from "@/components/common/ConsultationLink"
 import React from "react"
 
 const Hero = () => {
@@ -32,9 +33,9 @@ const Hero = () => {
           </div>
 
           <div className='hero-cta'>
-            <Link href={appointmentHref()} className='button-primary'>
+            <ConsultationLink href={appointmentHref()} intent='default' location='hero' className='button-primary'>
               Book a consultation
-            </Link>
+            </ConsultationLink>
             <Link href='/pricing' className='button-primary secondary-cta'>
               View plans
             </Link>

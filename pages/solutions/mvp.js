@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Title, TitleSm } from "@/components/common/Title"
 import Banner from "@/components/Banner"
 import { Seo } from "@/components/common/Seo"
+import ConsultationLink from "@/components/common/ConsultationLink"
 import { mvpPackage, appointmentHref } from "@/assets/data/offers"
 
 const MvpPage = () => {
@@ -37,9 +38,9 @@ const MvpPage = () => {
               ))}
             </ul>
             <div className='offer-actions'>
-              <Link href={appointmentHref("mvp")} className='button-primary'>
+              <ConsultationLink href={appointmentHref("mvp")} intent='mvp' location='mvp' className='button-primary'>
                 Build my MVP
-              </Link>
+              </ConsultationLink>
               <Link href='/pricing' className='button-primary secondary-cta'>
                 Compare software plans
               </Link>

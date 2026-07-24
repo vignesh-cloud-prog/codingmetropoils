@@ -3,6 +3,7 @@ import { Title, TitleSm } from "@/components/common/Title"
 import Banner from "@/components/Banner"
 import SoftwarePlans from "@/components/SoftwarePlans"
 import { Seo } from "@/components/common/Seo"
+import ConsultationLink from "@/components/common/ConsultationLink"
 import { websiteCrm, appointmentHref } from "@/assets/data/offers"
 
 const WebsiteCrmPage = () => {
@@ -68,9 +69,9 @@ const WebsiteCrmPage = () => {
               ))}
             </ul>
             <div className='offer-actions'>
-              <Link href={appointmentHref("webcrm")} className='button-primary'>
+              <ConsultationLink href={appointmentHref("webcrm")} intent='webcrm' location='webcrm' className='button-primary'>
                 Get Website + CRM
-              </Link>
+              </ConsultationLink>
               <Link href='/pricing' className='button-primary secondary-cta'>
                 See Growth plan
               </Link>

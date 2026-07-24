@@ -1,4 +1,5 @@
 import { Title, TitleSm } from "@/components/common/Title"
+import ConsultationLink from "@/components/common/ConsultationLink"
 import Link from "next/link"
 import React from "react"
 import { AiFillBehanceCircle, AiFillInstagram, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai"
@@ -6,6 +7,7 @@ import { BiUserCircle } from "react-icons/bi"
 import { BsFacebook } from "react-icons/bs"
 import { FiHeadphones, FiHelpCircle } from "react-icons/fi"
 import { IoLocationOutline } from "react-icons/io5"
+import { trackEmail, trackWhatsApp } from "@/lib/analytics"
 
 const Contact = () => {
   return (
@@ -17,18 +19,18 @@ const Contact = () => {
             <br />
             <Title title='Tell us what you need — AI, MVP, Website + CRM, or enterprise' className='title-bg' as='h1' />
             <div className='offer-actions' style={{ marginTop: 24 }}>
-              <Link href='/appointment?intent=ai' className='button-primary'>
+              <ConsultationLink href='/appointment?intent=ai' intent='ai' location='contact' className='button-primary'>
                 Get AI setup
-              </Link>
-              <Link href='/appointment?intent=mvp' className='button-primary secondary-cta'>
+              </ConsultationLink>
+              <ConsultationLink href='/appointment?intent=mvp' intent='mvp' location='contact' className='button-primary secondary-cta'>
                 Build my MVP
-              </Link>
-              <Link href='/appointment?intent=webcrm' className='button-primary secondary-cta'>
+              </ConsultationLink>
+              <ConsultationLink href='/appointment?intent=webcrm' intent='webcrm' location='contact' className='button-primary secondary-cta'>
                 Website + CRM
-              </Link>
-              <Link href='/appointment?intent=enterprise' className='button-primary secondary-cta'>
+              </ConsultationLink>
+              <ConsultationLink href='/appointment?intent=enterprise' intent='enterprise' location='contact' className='button-primary secondary-cta'>
                 Enterprise inquiry
-              </Link>
+              </ConsultationLink>
             </div>
           </div>
           <div className='content py flex1'>
@@ -36,7 +38,11 @@ const Contact = () => {
               <div className='contact-deatils'>
                 <div className='box'>
                   <FiHeadphones size={30} className='icons' />
-                  <h3>+91 8762363186</h3>
+                  <h3>
+                    <a href='https://wa.me/918762363186' target='_blank' rel='noopener noreferrer' onClick={() => trackWhatsApp("contact")}>
+                      +91 8762363186
+                    </a>
+                  </h3>
                   <span>Call us: 24X7</span>
                 </div>
                 <div className='box'>
@@ -46,7 +52,11 @@ const Contact = () => {
                 </div>
                 <div className='box'>
                   <FiHelpCircle size={30} className='icons' />
-                  <h3>contact@codemadebiz.com</h3>
+                  <h3>
+                    <a href='mailto:contact@codemadebiz.com' onClick={() => trackEmail("contact")}>
+                      contact@codemadebiz.com
+                    </a>
+                  </h3>
                   <span>Drop us a line anytime!</span>
                 </div>
                 <div className='box'>

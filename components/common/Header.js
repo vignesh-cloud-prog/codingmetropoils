@@ -5,6 +5,7 @@ import { RiMenu4Line } from "react-icons/ri"
 import { AiOutlineClose } from "react-icons/ai"
 import { appointmentHref } from "@/assets/data/offers"
 import BrandLogo from "./BrandLogo"
+import ConsultationLink from "./ConsultationLink"
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState("")
@@ -56,9 +57,9 @@ const Header = () => {
             <Link href='/contact' className={isActive("/contact")}>
               Contact
             </Link>
-            <Link href={appointmentHref()} className='button-primary'>
+            <ConsultationLink href={appointmentHref()} intent='default' location='header' className='button-primary'>
               Book a consultation
-            </Link>
+            </ConsultationLink>
           </nav>
           <button className='button-menu' onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>
             {open ? <AiOutlineClose size={24} /> : <RiMenu4Line size={24} />}

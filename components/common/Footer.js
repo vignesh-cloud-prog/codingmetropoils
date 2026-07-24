@@ -6,6 +6,8 @@ import { useState, useEffect } from "react"
 import { appointmentHref } from "@/assets/data/offers"
 import BrandLogo from "./BrandLogo"
 import BrandName from "./BrandName"
+import ConsultationLink from "./ConsultationLink"
+import { trackEmail, trackWhatsApp } from "@/lib/analytics"
 
 const Footer = () => {
   const [phoneCopied, setPhoneCopied] = useState(false)
@@ -43,7 +45,13 @@ const Footer = () => {
               <br />
               <br />
               <div className='contact-item'>
-                <a href={`https://wa.me/${phoneNumber.replace("+", "")}`} target='_blank' rel='noopener noreferrer' className='contact-link'>
+                <a
+                  href={`https://wa.me/${phoneNumber.replace("+", "")}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='contact-link'
+                  onClick={() => trackWhatsApp("footer")}
+                >
                   <h3>{phoneNumber}</h3>
                 </a>
                 <button onClick={() => copyToClipboard(phoneNumber, "phone")} className='copy-button' aria-label='Copy phone number' title='Copy phone number'>
@@ -53,7 +61,7 @@ const Footer = () => {
               </div>
 
               <div className='contact-item'>
-                <a href={`mailto:${email}`} className='contact-link'>
+                <a href={`mailto:${email}`} className='contact-link' onClick={() => trackEmail("footer")}>
                   <h3>{email}</h3>
                 </a>
                 <button onClick={() => copyToClipboard(email, "email")} className='copy-button' aria-label='Copy email' title='Copy email'>
@@ -62,9 +70,9 @@ const Footer = () => {
                 </button>
               </div>
               <br />
-              <Link href={appointmentHref()} className='button-primary'>
+              <ConsultationLink href={appointmentHref()} intent='default' location='footer' className='button-primary'>
                 Book a consultation
-              </Link>
+              </ConsultationLink>
             </div>
 
             <ul>

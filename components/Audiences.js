@@ -1,5 +1,5 @@
-import Link from "next/link"
 import { Title, TitleSm } from "@/components/common/Title"
+import ConsultationLink from "@/components/common/ConsultationLink"
 import { audiences, appointmentHref } from "@/assets/data/offers"
 
 const Audiences = () => {
@@ -17,9 +17,14 @@ const Audiences = () => {
             <div className='offer-card' key={item.id}>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
-              <Link href={appointmentHref(item.intent)} className='button-primary'>
+              <ConsultationLink
+                href={appointmentHref(item.intent)}
+                intent={item.intent}
+                location='audiences'
+                className='button-primary'
+              >
                 {item.cta}
-              </Link>
+              </ConsultationLink>
             </div>
           ))}
         </div>
