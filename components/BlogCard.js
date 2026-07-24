@@ -4,13 +4,11 @@ import { latestArticles2026 } from "@/assets/data/latestArticles2026"
 
 const BlogCard = () => {
   return (
-    <>
-      <div className='container blog-card grid-2 py'>
-        {latestArticles2026.map((item) => (
-          <Card data={item} key={item.id} path='blogs' />
-        ))}
-      </div>
-    </>
+    <div className='blog-card grid-2'>
+      {latestArticles2026.map((item) => (
+        <Card data={item} key={item.id} path='blogs' />
+      ))}
+    </div>
   )
 }
 

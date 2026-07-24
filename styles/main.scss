@@ -205,13 +205,14 @@
 .button-primary.secondary-cta {
   background: transparent;
   color: $white;
-  border: 1px solid rgba($white, 0.35);
+  border: 1px solid rgba($white, 0.4);
   box-shadow: none;
 }
 
 .button-primary.secondary-cta:hover {
-  color: $indigo;
-  border-color: $indigo;
+  color: $white;
+  border-color: $purple;
+  background: rgba($purple, 0.12);
 }
 
 .offer-section {
@@ -464,15 +465,202 @@
   }
 }
 
+.jotform-placeholder {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px dashed rgba($white, 0.2);
+  border-radius: 24px 0 24px 0;
+  background: rgba($white, 0.03);
+
+  p {
+    color: rgba($white, 0.7);
+    margin-bottom: 20px;
+  }
+}
+
+.legal-page {
+  .legal-content {
+    max-width: 800px;
+    margin: 0 auto $xll;
+  }
+
+  h2 {
+    font-size: $xl-4;
+    font-weight: 500;
+    margin: $xll 0 $xl-4;
+  }
+
+  p {
+    color: rgba($white, 0.72);
+    line-height: 1.8;
+    margin-bottom: $xl-4;
+  }
+
+  ul {
+    margin: 0 0 $xl-5 $xl-5;
+  }
+
+  li {
+    color: rgba($white, 0.72);
+    line-height: 1.7;
+    margin-bottom: $xl-3;
+    list-style: disc;
+  }
+
+  a {
+    color: $indigo;
+  }
+
+  .heading-title p {
+    margin-top: $xl-3;
+    color: rgba($white, 0.45);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: $sm;
+  }
+}
+
+footer .legal .connect a {
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition: 0.3s color;
+
+  &:hover {
+    color: $indigo;
+  }
+}
+
+/* Brand logo */
+.brand-logo-link {
+  display: inline-flex;
+  text-transform: none;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 6px 16px rgba(255, 45, 149, 0.15);
+  }
+}
+
+.brand-wordmark {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  text-transform: none;
+  color: $white;
+  line-height: 1.1;
+  white-space: nowrap;
+
+  .brand-caption {
+    background: $gradient2;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.brand-logo-sm .brand-wordmark {
+  font-size: 15px;
+}
+
+.brand-logo-md .brand-wordmark {
+  font-size: 22px;
+}
+
+.brand-logo-lg .brand-wordmark {
+  font-size: 20px;
+}
+
+.brand-logo-xl .brand-wordmark {
+  font-size: 22px;
+}
+
+.hero-brand-text {
+  font-family: "Space Grotesk", "Poppins", sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  margin: 0 auto 18px;
+  line-height: 1.1;
+
+  span {
+    background: $gradient2;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+header .logo .brand-logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+footer .logo .brand-logo {
+  margin-bottom: 8px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  header .brand-wordmark {
+    display: inline;
+    font-size: 16px;
+  }
+
+  header .logo .brand-logo {
+    gap: 8px;
+
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+  }
+
+  .hero-brand-text {
+    font-size: 30px;
+    margin: 0 auto 20px;
+  }
+
+  .hero .hero-cta {
+    margin-top: 32px;
+    gap: 14px;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  footer .logo .brand-logo img {
+    width: 36px;
+    height: 36px;
+  }
+
+  footer .brand-wordmark {
+    font-size: 16px;
+  }
+}
+
 @media screen and (max-width: 992px) {
   .offer-grid-3,
   .plans-grid {
     grid-template-columns: 1fr;
-  }
-
-  .hero .hero-title {
-    font-size: 48px;
-    line-height: 1.15;
   }
 }
 
@@ -483,10 +671,41 @@
     border-radius: 20px 0 20px 0;
   }
 
+  .hero-brand-text {
+    font-size: 26px;
+    margin: 0 auto 18px;
+  }
+
+  .hero-cta,
+  .offer-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero .hero-cta {
+    margin-top: 36px;
+    gap: 12px;
+    max-width: 100%;
+    padding: 0 8px;
+  }
+
   .hero-cta .button-primary,
   .offer-actions .button-primary {
     width: 100%;
     text-align: center;
     justify-content: center;
+  }
+
+  .heading-title {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .plans-grid,
+  .offer-grid-3,
+  .offer-grid-ai,
+  .offer-grid-offers {
+    grid-template-columns: 1fr;
   }
 }

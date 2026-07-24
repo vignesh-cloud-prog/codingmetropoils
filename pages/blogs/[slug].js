@@ -1,16 +1,37 @@
-import Head from "next/head"
 import Link from "next/link"
 import { latestArticles2026 } from "@/assets/data/latestArticles2026"
 import { Title, TitleSm } from "@/components/common/Title"
+import { Seo } from "@/components/common/Seo"
 import { HiOutlineArrowLeft, HiOutlineArrowRight } from "react-icons/hi"
 
 const BlogPost = ({ article, related }) => {
   return (
     <>
-      <Head>
-        <title>{article.title} - Code Made Biz</title>
-        <meta name='description' content={article.excerpt} />
-      </Head>
+      <Seo
+        title={`${article.title} | CodeMadeBiz`}
+        description={article.excerpt}
+        path={`/blogs/${article.slug}`}
+        image={article.cover}
+        type='article'
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: article.title,
+          description: article.excerpt,
+          image: `https://codemadebiz.com${article.cover}`,
+          datePublished: article.date,
+          author: { "@type": "Organization", name: "CodeMadeBiz" },
+          publisher: {
+            "@type": "Organization",
+            name: "CodeMadeBiz",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://codemadebiz.com/images/brand/logo-full.png",
+            },
+          },
+          mainEntityOfPage: `https://codemadebiz.com/blogs/${article.slug}`,
+        }}
+      />
 
       <section className='blog-post agency bg-top'>
         <div className='container'>
@@ -21,7 +42,7 @@ const BlogPost = ({ article, related }) => {
             <TitleSm title={article.catgeory} />
             <br />
             <br />
-            <Title title={article.title} />
+            <Title title={article.title} as='h1' />
             <div className='blog-post-meta'>
               <span>{article.date}</span>
               <span>/</span>
@@ -31,7 +52,14 @@ const BlogPost = ({ article, related }) => {
           </div>
 
           <div className='blog-post-image'>
-            <img src={article.cover} alt={article.title} />
+            <img
+              src={article.cover}
+              alt={article.title}
+              loading='eager'
+              decoding='async'
+              width={1200}
+              height={630}
+            />
           </div>
 
           <article className='blog-post-content'>
@@ -53,7 +81,7 @@ const BlogPost = ({ article, related }) => {
           </article>
 
           <div className='blog-post-cta'>
-            <TitleSm title='READY TO BUILD?' />
+            <TitleSm title='READY TO BUILD?' as='h2' />
             <br />
             <p>Let’s turn these ideas into a website, app, or growth campaign for your brand.</p>
             <Link href='/contact' className='button-primary'>
@@ -64,12 +92,12 @@ const BlogPost = ({ article, related }) => {
           {related.length > 0 && (
             <div className='blog-post-related'>
               <div className='blog-post-related-title'>
-                <TitleSm title='MORE ARTICLES' />
+                <TitleSm title='MORE ARTICLES' as='h2' />
               </div>
               <div className='blog-post-related-grid'>
                 {related.map((item) => (
                   <Link href={`/blogs/${item.slug}`} key={item.id} className='blog-post-related-card'>
-                    <img src={item.cover} alt={item.title} />
+                    <img src={item.cover} alt={item.title} loading='lazy' decoding='async' width={400} height={220} />
                     <div>
                       <span>
                         {item.catgeory} / {item.date}

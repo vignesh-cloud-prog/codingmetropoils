@@ -1,0 +1,21 @@
+{
+  "name": "CodeMadeBiz",
+  "short_name": "CodeMadeBiz",
+  "description": "Software, AI & marketing for SMBs and startups",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0612",
+  "theme_color": "#c05aff",
+  "icons": [
+    {
+      "src": "/images/brand/android-chrome-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/brand/android-chrome-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

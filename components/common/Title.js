@@ -1,15 +1,18 @@
 export const TitleLogo = ({ title, caption, className }) => {
   return (
-    <h1 className={`${className}  title-logo`}>
+    <p className={`${className || ""} title-logo`.trim()}>
       <span>{caption}</span>
       {title}
-    </h1>
+    </p>
   )
 }
 
-export const TitleSm = ({ title }) => {
-  return <h1 className='titleSm'>{title}</h1>
+/** Eyebrow / section label — not a document heading by default */
+export const TitleSm = ({ title, as: Tag = "p" }) => {
+  return <Tag className='titleSm'>{title}</Tag>
 }
-export const Title = ({ title, className }) => {
-  return <h1 className={`${className} title`}>{title}</h1>
+
+/** Primary section/page title — h2 by default; pass as="h1" for page heroes */
+export const Title = ({ title, className, as: Tag = "h2" }) => {
+  return <Tag className={`${className || ""} title`.trim()}>{title}</Tag>
 }

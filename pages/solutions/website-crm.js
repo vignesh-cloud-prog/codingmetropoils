@@ -1,34 +1,42 @@
-import Head from "next/head"
 import Link from "next/link"
 import { Title, TitleSm } from "@/components/common/Title"
 import Banner from "@/components/Banner"
 import SoftwarePlans from "@/components/SoftwarePlans"
+import { Seo } from "@/components/common/Seo"
 import { websiteCrm, appointmentHref } from "@/assets/data/offers"
 
 const WebsiteCrmPage = () => {
   return (
     <>
-      <Head>
-        <title>Website + CRM Dashboard - CodeMadeBiz</title>
-        <meta name='description' content={websiteCrm.promise} />
-      </Head>
+      <Seo
+        title='Website + CRM Dashboard | CodeMadeBiz'
+        description={websiteCrm.promise}
+        path='/solutions/website-crm'
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: websiteCrm.title,
+          description: websiteCrm.promise,
+          provider: { "@type": "Organization", name: "CodeMadeBiz" },
+        }}
+      />
       <section className='agency bg-top solution-page'>
         <div className='container'>
           <div className='heading-title'>
             <TitleSm title='WEBSITE + CRM' />
             <br />
             <br />
-            <Title title={websiteCrm.title} className='title-bg' />
+            <Title title={websiteCrm.title} className='title-bg' as='h1' />
             <p>{websiteCrm.promise}</p>
           </div>
 
           <div className='solution-panel'>
-            <TitleSm title='THE PROBLEM' />
+            <TitleSm title='THE PROBLEM' as='h2' />
             <p className='solution-lead'>{websiteCrm.problem}</p>
           </div>
 
           <div className='solution-panel'>
-            <TitleSm title='THE FLOW' />
+            <TitleSm title='THE FLOW' as='h2' />
             <div className='flow-steps'>
               <span>Visitor</span>
               <span>→</span>
@@ -41,7 +49,7 @@ const WebsiteCrmPage = () => {
           </div>
 
           <div className='solution-panel'>
-            <TitleSm title='FEATURES' />
+            <TitleSm title='FEATURES' as='h2' />
             <div className='offer-grid offer-grid-offers'>
               {websiteCrm.features.map((item) => (
                 <div className='offer-card' key={item.title}>
@@ -53,7 +61,7 @@ const WebsiteCrmPage = () => {
           </div>
 
           <div className='solution-panel'>
-            <TitleSm title='WHO IT’S FOR' />
+            <TitleSm title='WHO IT’S FOR' as='h2' />
             <ul className='solution-list'>
               {websiteCrm.forWho.map((item) => (
                 <li key={item}>{item}</li>

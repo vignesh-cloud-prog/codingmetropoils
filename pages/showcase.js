@@ -1,13 +1,15 @@
 import { ShowCase } from "@/sections"
-import Head from "next/head"
+import { Seo } from "@/components/common/Seo"
 import React from "react"
 
 const showcase = () => {
   return (
     <>
-      <Head>
-        <title>ShowCase - CodeMadeBiz</title>
-      </Head>
+      <Seo
+        title='Showcase | CodeMadeBiz'
+        description='Selected CodeMadeBiz work across websites, apps, branding, and digital experiences for SMBs and startups.'
+        path='/showcase'
+      />
       <ShowCase />
     </>
   )

@@ -1,13 +1,15 @@
 import { Agency } from "@/sections"
-import Head from "next/head"
+import { Seo, organizationSchema } from "@/components/common/Seo"
 
 const AgencyPage = () => {
   return (
     <>
-      <Head>
-        <title>About CodeMadeBiz</title>
-        <meta name='description' content='CodeMadeBiz builds software, AI, and marketing solutions for local SMBs and startups — plus custom enterprise tools.' />
-      </Head>
+      <Seo
+        title='About CodeMadeBiz'
+        description='CodeMadeBiz builds software, AI, and marketing solutions for local SMBs and startups — plus custom enterprise tools in Bengaluru and remotely.'
+        path='/agency'
+        schema={organizationSchema}
+      />
       <Agency />
     </>
   )

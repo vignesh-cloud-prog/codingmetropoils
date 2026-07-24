@@ -19,6 +19,10 @@
     z-index: -1;
     overflow-x: hidden !important;
   }
+  .container {
+    position: relative;
+    z-index: 1;
+  }
   .hero-title {
     font-size: $xll-3;
     line-height: 115px;
@@ -42,44 +46,84 @@
   }
   @media screen and (max-width: 992px) {
     .hero-title {
-      font-size: 70px;
-      line-height: 85px;
-      padding: 0 20px;
+      font-size: 42px;
+      line-height: 1.25;
+      padding: 0 16px;
     }
   }
   @media screen and (max-width: 800px) {
     height: auto !important;
-    padding-bottom: 60px;
-    padding-top: $xll;
-    .hero-title {
-      font-size: 60px;
-      line-height: 70px;
-      margin: 40px auto 50px;
+    min-height: calc(100dvh - 60px);
+    min-height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden !important;
+    padding: 72px 0 80px;
+
+    &::before {
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-position: center top;
     }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 0 auto 28px;
+      padding: 0 16px;
+      max-width: 18ch;
+    }
+
     .sub-heading {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 12px;
+      margin: 8px 0 8px;
+
       .titleSm {
-        margin: 8px $xl-1;
+        margin: 0;
+        font-size: 14px;
+        letter-spacing: 2.5px;
+        line-height: 1.4;
       }
+
       span {
-        display: inline-block;
-        font-size: 30px;
-        line-height: 10px;
-        height: 10px;
-        margin: 5px 0;
+        display: none;
       }
     }
   }
   @media screen and (max-width: 576px) {
-    padding-top: 60px;
-    padding-bottom: 50px;
+    min-height: calc(100dvh - 56px);
+    min-height: calc(100vh - 56px);
+    padding: 64px 12px 72px;
+
     .hero-title {
-      font-size: 52px;
-      line-height: 62px;
-      padding: 0 10px;
-      margin: 35px auto 45px;
+      font-size: 28px;
+      line-height: 1.35;
+      margin: 0 auto 24px;
+      padding: 0 4px;
+    }
+
+    .sub-heading {
+      gap: 14px;
+      margin: 4px 0 12px;
+
+      .titleSm {
+        font-size: 13px;
+        letter-spacing: 2px;
+      }
     }
   }
 }
@@ -108,60 +152,221 @@
 //banner
 .banner {
   margin-top: $xll-3;
+  margin-bottom: 40px;
+
   .container {
     border-radius: 50px 0 50px 0;
-    padding: $xll;
-    background: rgb(192, 90, 255);
+    padding: $xll $xll-2;
     background: $gradient;
     @include flex(center, space-between, none);
+    gap: 32px;
   }
+
+  .banner-copy {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .banner-title {
+    margin: 0;
+    color: $white;
+    font-family: "Space Grotesk", "Poppins", sans-serif;
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.2px;
+    text-shadow: 0 1px 2px rgba($dark, 0.25);
+    -webkit-text-fill-color: $white;
+    background: none;
+  }
+
+  .banner-subtitle {
+    margin: 14px 0 0;
+    color: rgba($white, 0.92);
+    font-size: $xl-1;
+    line-height: 1.55;
+    max-width: 540px;
+  }
+
+  .banner-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 14px 32px;
+    border-radius: 50px;
+    background: $white;
+    color: $dark;
+    font-weight: 600;
+    font-size: $md;
+    text-transform: capitalize;
+    box-shadow: 0 8px 24px rgba($dark, 0.2);
+    transition: 0.25s ease;
+
+    &:hover {
+      background: rgba($white, 0.92);
+      color: $dark;
+      transform: translateY(-1px);
+    }
+  }
+
   @media screen and (max-width: 992px) {
     .container {
-      padding: 40px;
+      padding: 40px 28px;
+      flex-direction: column;
+      text-align: center;
+      gap: 24px;
+    }
+
+    .banner-subtitle {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .banner-cta {
+      width: 100%;
+      max-width: 320px;
     }
   }
 }
 
 //testimonial
 .testimonial {
-  .card {
-    padding: 20px;
-  }
-  .cards {
-    margin-top: $xll;
+  .heading-title {
     p {
-      margin-bottom: $xl-3;
-      font-size: $xl;
-      line-height: $xl-5;
-    }
-    .image {
-      @include flex(center, none, none);
-      margin-bottom: $xl-4;
-      .img {
-        width: $xll-3;
-        height: $xll-3;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 50%;
-        }
-      }
-      .img-text {
-        margin-left: $xl-3;
-        h3 {
-          font-size: $xl-2;
-          margin-bottom: $s;
-        }
-        span {
-          color: rgba($white, 0.5);
-          text-transform: uppercase;
-          font-size: $sm;
-          letter-spacing: 3px;
-        }
-      }
+      margin-top: $xl-4;
+      color: rgba($white, 0.65);
     }
   }
+
+  .cards {
+    margin-top: $xl-6;
+    padding: 0 10px;
+  }
+
+  .testimonial-item {
+    text-align: left;
+    padding: 8px 24px 28px;
+    margin: 0 8px;
+  }
+
+  .testimonial-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: $xl-4;
+  }
+
+  .offer-tag,
+  .built-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .offer-tag {
+    background: rgba($purple, 0.18);
+    color: $purple;
+  }
+
+  .built-tag {
+    border: 1px solid rgba($white, 0.15);
+    color: rgba($white, 0.65);
+  }
+
+  .testimonial-client {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: $xl-5;
+
+    .img {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid rgba($purple, 0.45);
+      }
+    }
+
+    .client-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    h3 {
+      font-size: $xl-2;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    span {
+      color: rgba($white, 0.5);
+      font-size: $sm;
+      letter-spacing: 0.4px;
+    }
+  }
+
+  .testimonial-quote {
+    margin: 0 0 $xl-4;
+
+    p {
+      margin: 0;
+      font-size: $xl-1;
+      line-height: 1.7;
+      color: rgba($white, 0.82);
+    }
+  }
+
+  .case-link {
+    display: inline-flex;
+    align-items: center;
+    color: $indigo;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: $sm;
+
+    .link-icon {
+      margin-left: 8px;
+    }
+
+    &:hover {
+      color: $purple;
+    }
+  }
+
+  .slick-dots {
+    bottom: -36px;
+
+    li button:before {
+      color: $white;
+      opacity: 0.35;
+      font-size: 10px;
+    }
+
+    li.slick-active button:before {
+      color: $purple;
+      opacity: 1;
+    }
+  }
+}
+
+.trustpilot-wrap {
+  max-width: 720px;
+  margin: 24px auto 56px;
+  padding: 0 16px;
 }
 
 //showcase
@@ -187,16 +392,36 @@
 }
 
 //blog-card
+.latest-articles {
+  padding: $xll 0 $xll-2;
+
+  .heading-title {
+    padding-top: $xll;
+    padding-bottom: $xl-6;
+    margin-bottom: 0;
+  }
+
+  .blog-card {
+    margin-top: 12px;
+    padding-top: 8px;
+    padding-bottom: $xl-6;
+  }
+}
+
 .blog-card {
   .card {
     @include flex(none, space-between, none);
+    gap: 24px;
+
     .card-img {
       width: 40%;
       height: 250px;
+      margin-bottom: 0;
     }
+
     .card-details {
       width: 55%;
-      padding: $xll 0;
+      padding: $xl-4 0;
     }
   }
 }
@@ -361,6 +586,15 @@ footer {
   }
 }
 .agency {
+  .heading-title {
+    padding-bottom: $xl-6;
+  }
+
+  .products-grid,
+  .services-grid {
+    margin-top: 4px;
+  }
+
   .content {
     margin-top: $xll;
     h1 {
@@ -475,39 +709,56 @@ footer {
 @media screen and (max-width: 800px) {
   .banner {
     margin-top: 60px;
+    margin-bottom: 24px;
+
     .container {
-      @include flex(center, center, column);
-      padding: 50px 30px;
-      text-align: center;
-      a {
-        margin-top: 40px;
-        padding: 15px 40px;
-        font-size: 18px;
-      }
-      h1 {
-        font-size: 30px;
-        line-height: 1.4;
-        margin-bottom: 10px;
-      }
-      .title-logo {
-        font-size: 28px;
-        line-height: 1.4;
-        margin-bottom: 10px;
-      }
+      padding: 36px 22px;
+    }
+
+    .banner-title {
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    .banner-subtitle {
+      font-size: 15px;
+    }
+
+    .banner-cta {
+      margin-top: 4px;
+      width: 100%;
+      max-width: none;
     }
   }
 
   .blog-card {
     .card {
       @include flex(none, none, column);
+      gap: 16px;
+
       .card-img {
         width: 100%;
-        height: 300px;
+        height: 220px;
       }
+
       .card-details {
         width: 100%;
-        padding: 0;
+        padding: 0 0 12px;
       }
+    }
+  }
+
+  .latest-articles {
+    padding: 48px 0 64px;
+
+    .heading-title {
+      padding-top: 24px;
+      padding-bottom: 28px;
+    }
+
+    .blog-card {
+      margin-top: 4px;
+      padding-bottom: 24px;
     }
   }
   .w-30,
@@ -536,12 +787,36 @@ footer {
           display: flex;
           justify-content: center;
           align-items: center;
+          flex-wrap: wrap;
           li {
-            margin: 0 20px;
+            margin: 0 12px;
           }
         }
       }
       flex-direction: column;
     }
+  }
+
+  .ml,
+  .mr {
+    margin-left: 0 !important;
+  }
+
+  header,
+  main,
+  footer,
+  section {
+    max-width: 100vw;
+  }
+
+  .testimonial .cards {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .flow-steps {
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
   }
 }

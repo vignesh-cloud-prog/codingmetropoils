@@ -1,10 +1,10 @@
 import Link from "next/link"
-import { TitleLogo } from "./Title"
 import { BsFacebook } from "react-icons/bs"
 import { AiFillInstagram, AiFillLinkedin, AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai"
 import { HiOutlineClipboardCopy } from "react-icons/hi"
 import { useState, useEffect } from "react"
 import { appointmentHref } from "@/assets/data/offers"
+import BrandLogo from "./BrandLogo"
 
 const Footer = () => {
   const [phoneCopied, setPhoneCopied] = useState(false)
@@ -36,7 +36,7 @@ const Footer = () => {
         <div className='container'>
           <div className='grid-4'>
             <div className='logo'>
-              <TitleLogo title='Biz' caption='CodeMade' className='logobg' />
+              <BrandLogo size='md' withWordmark />
               <br />
               <span>Software, AI & marketing for SMBs and startups</span>
               <br />
@@ -135,9 +135,9 @@ const Footer = () => {
               <span>© {currentYear} CodeMadeBiz. ALL RIGHTS RESERVED.</span>
             </div>
             <div className='connect'>
-              <span>PRIVACY POLICY</span>
+              <Link href='/privacy'>PRIVACY POLICY</Link>
               <span> &nbsp; | &nbsp; </span>
-              <span>TERMS & CONDITIONS</span>
+              <Link href='/terms'>TERMS & CONDITIONS</Link>
             </div>
           </div>
         </div>

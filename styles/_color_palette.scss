@@ -1,11 +1,11 @@
-$indigo: #845aff;
+$indigo: #3b6bff;
 $white: #ffffff;
-$dark: #080e10;
-$purple: #00dc93;
-$purple: #ff55db;
-$purple: #c05aff;
-$gradient: linear-gradient(203deg, rgba(192, 90, 255, 1) 0%, rgba(67, 39, 158, 1) 100%);
-$gradient2: linear-gradient(250deg, rgba(255, 85, 219, 1) 24%, rgba(52, 108, 255, 1) 100%);
+$dark: #0a0612;
+$purple: #ff2d95;
+$accent-warm: #ff8a3d;
+$gradient: linear-gradient(203deg, rgba(123, 44, 255, 1) 0%, rgba(255, 45, 149, 1) 100%);
+$gradient2: linear-gradient(250deg, rgba(255, 45, 149, 1) 18%, rgba(59, 107, 255, 1) 100%);
+$gradient-warm: linear-gradient(135deg, #ffb347 0%, #ff8a3d 55%, #ff5c8a 100%);
 
 .green {
   color: $purple;

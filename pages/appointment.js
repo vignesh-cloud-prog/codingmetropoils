@@ -1,72 +1,73 @@
-import React, { useEffect, useState } from "react"
-import Head from "next/head"
+import React, { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/router"
 import { TitleSm, Title } from "@/components/common/Title"
+import { Seo } from "@/components/common/Seo"
 import { intentLabels } from "@/assets/data/offers"
 
 export default function Appointment() {
   const router = useRouter()
-  const [iframeHeight, setIframeHeight] = useState(1200)
+  const [iframeHeight, setIframeHeight] = useState(900)
+  const [loadForm, setLoadForm] = useState(false)
+  const formRef = useRef(null)
   const intent = typeof router.query.intent === "string" ? router.query.intent : "default"
   const label = intentLabels[intent] || intentLabels.default
-
-  useEffect(() => {
-    const existingScript = document.getElementById("jotform-embed-script")
-    if (existingScript) {
-      existingScript.remove()
-    }
-
-    const adjustIframeHeight = () => {
-      try {
-        const iframe = document.getElementById("JotFormIFrame-241935017318455")
-        if (iframe) {
-          setIframeHeight(1200)
-
-          window.addEventListener("message", (event) => {
-            if (event.origin === "https://form.jotform.com") {
-              try {
-                const data = JSON.parse(event.data)
-                if (data.frameHeight) {
-                  setIframeHeight(data.frameHeight + 100)
-                }
-              } catch (e) {
-                // ignore non-JSON messages
-              }
-            }
-          })
-        }
-      } catch (error) {
-        console.error("Error adjusting iframe height:", error)
-      }
-    }
-
-    setTimeout(adjustIframeHeight, 1000)
-
-    return () => {
-      if (existingScript) {
-        existingScript.remove()
-      }
-    }
-  }, [])
 
   const formSrc =
     intent && intent !== "default"
       ? `https://form.jotform.com/241935017318455?isIframeEmbed=1&intent=${encodeURIComponent(intent)}`
       : "https://form.jotform.com/241935017318455?isIframeEmbed=1"
 
+  // Load iframe only when the form area is near the viewport
+  useEffect(() => {
+    if (loadForm || !formRef.current) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setLoadForm(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: "200px" }
+    )
+
+    observer.observe(formRef.current)
+    return () => observer.disconnect()
+  }, [loadForm])
+
+  useEffect(() => {
+    if (!loadForm) return undefined
+
+    const onMessage = (event) => {
+      if (event.origin !== "https://form.jotform.com") return
+      try {
+        const data = typeof event.data === "string" ? JSON.parse(event.data) : event.data
+        if (data?.frameHeight) {
+          setIframeHeight(data.frameHeight + 100)
+        }
+      } catch (e) {
+        // ignore non-JSON messages
+      }
+    }
+
+    window.addEventListener("message", onMessage)
+    return () => window.removeEventListener("message", onMessage)
+  }, [loadForm])
+
   return (
     <>
-      <Head>
-        <title>{label} - CodeMadeBiz</title>
-        <meta name='description' content='Book a consultation with CodeMadeBiz for software, AI, MVP, or enterprise work.' />
-      </Head>
+      <Seo
+        title={`${label} | CodeMadeBiz`}
+        description='Book a consultation with CodeMadeBiz for AI setup, MVP builds, Website + CRM, software plans, or enterprise custom tools.'
+        path={intent && intent !== "default" ? `/appointment?intent=${intent}` : "/appointment"}
+      />
 
       <section className='agency bg-top'>
         <div className='container'>
           <div className='heading-title'>
             <TitleSm title='BOOK A CONSULTATION' /> <br />
             <br />
-            <Title title={label} className='title-bg' />
+            <Title title={label} className='title-bg' as='h1' />
             <p>
               Tell us what you need — AI setup, MVP, Website + CRM, software plans, or enterprise custom tools — and we will map the right package.
             </p>
@@ -77,32 +78,39 @@ export default function Appointment() {
             )}
           </div>
 
-          <div className='py' style={{ maxWidth: "900px", margin: "0 auto" }}>
-            <div
-              style={{
-                width: "100%",
-                height: `${iframeHeight}px`,
-                overflow: "visible",
-                marginBottom: "50px",
-              }}
-            >
-              <iframe
-                id='JotFormIFrame-241935017318455'
-                title='CM Appointment Request Form'
-                allowTransparency='true'
-                allowFullScreen={true}
-                allow='geolocation; microphone; camera'
-                src={formSrc}
-                frameBorder='0'
+          <div className='py jotform-shell' style={{ maxWidth: "900px", margin: "0 auto" }} ref={formRef}>
+            {!loadForm ? (
+              <div className='jotform-placeholder'>
+                <p>Consultation form loads when you are ready — keeps this page fast.</p>
+                <button type='button' className='button-primary' onClick={() => setLoadForm(true)}>
+                  Load consultation form
+                </button>
+              </div>
+            ) : (
+              <div
                 style={{
                   width: "100%",
-                  height: "100%",
-                  border: "none",
+                  height: `${iframeHeight}px`,
                   overflow: "visible",
+                  marginBottom: "50px",
                 }}
-                scrolling='yes'
-              />
-            </div>
+              >
+                <iframe
+                  id='JotFormIFrame-241935017318455'
+                  title='CodeMadeBiz appointment request form'
+                  allow='geolocation; microphone; camera'
+                  src={formSrc}
+                  loading='lazy'
+                  referrerPolicy='no-referrer-when-downgrade'
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    border: "none",
+                    overflow: "visible",
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>

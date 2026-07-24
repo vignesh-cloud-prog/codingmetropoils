@@ -7,7 +7,7 @@ import Audiences from "@/components/Audiences"
 import OfferLines from "@/components/OfferLines"
 import AiServices from "@/components/AiServices"
 import SoftwarePlans from "@/components/SoftwarePlans"
-import { Title, TitleLogo, TitleSm } from "@/components/common/Title"
+import { Title, TitleSm } from "@/components/common/Title"
 import { BlogCard } from "@/components/router"
 import { Products } from "@/sections"
 import Link from "next/link"
@@ -19,7 +19,9 @@ const Hero = () => {
     <>
       <section className='hero'>
         <div className='container'>
-          <TitleLogo title='Biz' caption='CodeMade' className='logobg' />
+          <p className='hero-brand-text'>
+            <span>CodeMade</span>Biz
+          </p>
           <h1 className='hero-title'>SOFTWARE, AI & MARKETING FOR SMBs & STARTUPS</h1>
 
           <div className='sub-heading'>
@@ -68,10 +70,17 @@ const Hero = () => {
       <Products />
       <Testimonial />
       <TrustPilotReview />
-      <div className='text-center'>
-        <Title title='Latest news & articles' />
-      </div>
-      <BlogCard />
+      <section className='latest-articles'>
+        <div className='container'>
+          <div className='heading-title'>
+            <TitleSm title='INSIGHTS' />
+            <br />
+            <br />
+            <Title title='Latest news & articles' />
+          </div>
+          <BlogCard />
+        </div>
+      </section>
       <Banner intent='software' />
     </>
   )

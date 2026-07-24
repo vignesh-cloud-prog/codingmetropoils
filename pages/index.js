@@ -1,16 +1,28 @@
 import { Hero } from "@/sections"
-import Head from "next/head"
+import { Seo, organizationSchema, websiteSchema } from "@/components/common/Seo"
 
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>CodeMadeBiz — Software, AI & Marketing for SMBs and Startups</title>
-        <meta
-          name='description'
-          content='CodeMadeBiz builds websites, apps, AI agents, CRM dashboards, and growth systems for local SMBs and startups — plus custom enterprise tools.'
-        />
-      </Head>
+      <Seo
+        title='CodeMadeBiz — Software, AI & Marketing for SMBs and Startups'
+        description='Complete software, AI, and marketing solutions for local SMBs and startups — websites, apps, CRM, AI agents, and custom enterprise tools.'
+        path='/'
+        schema={[
+          { ...organizationSchema, "@id": "https://codemadebiz.com/#organization" },
+          websiteSchema,
+          {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "CodeMadeBiz",
+            url: "https://codemadebiz.com",
+            image: "https://codemadebiz.com/images/brand/og-image.png",
+            telephone: "+918762363186",
+            areaServed: "IN",
+            serviceType: ["Web Development", "App Development", "AI Solutions", "Digital Marketing", "CRM"],
+          },
+        ]}
+      />
       <Hero />
     </>
   )

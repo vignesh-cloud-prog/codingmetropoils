@@ -15,7 +15,7 @@ const Contact = () => {
           <div className='heading-title'>
             <TitleSm title='CONTACT' /> <br />
             <br />
-            <Title title='Tell us what you need — AI, MVP, Website + CRM, or enterprise' className='title-bg' />
+            <Title title='Tell us what you need — AI, MVP, Website + CRM, or enterprise' className='title-bg' as='h1' />
             <div className='offer-actions' style={{ marginTop: 24 }}>
               <Link href='/appointment?intent=ai' className='button-primary'>
                 Get AI setup

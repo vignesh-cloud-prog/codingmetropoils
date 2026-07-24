@@ -1,18 +1,22 @@
+import React from "react"
 import Link from "next/link"
-import { Title, TitleLogo } from "./common/Title"
 import { appointmentHref } from "@/assets/data/offers"
 
 const Banner = ({ intent, title, subtitle, cta }) => {
   return (
     <>
-      <section className='banner' style={{ marginBottom: 40 }}>
+      <section className='banner'>
         <div className='container'>
-          <div>
-            <Title title={title || "Ready to build your software, AI, or growth stack?"} /> <br />
-            <TitleLogo title={subtitle || "Book a consultation — tell us your intent and we will map a plan."} />
+          <div className='banner-copy'>
+            <p className='banner-title'>
+              {title || "Ready to build your software, AI, or growth stack?"}
+            </p>
+            <p className='banner-subtitle'>
+              {subtitle || "Book a consultation — tell us your intent and we will map a plan."}
+            </p>
           </div>
-          <div>
-            <Link href={appointmentHref(intent)} className='button-primary'>
+          <div className='banner-action'>
+            <Link href={appointmentHref(intent)} className='banner-cta'>
               {cta || "Book a consultation"}
             </Link>
           </div>

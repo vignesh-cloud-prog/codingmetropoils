@@ -15,7 +15,7 @@ const Services = () => {
           <div className='heading-title'>
             <TitleSm title='OUR SERVICES' /> <br />
             <br />
-            <Title title='Software, AI, marketing & enterprise tools' className='title-bg' />
+            <Title title='Software, AI, marketing & enterprise tools' className='title-bg' as='h1' />
             <p>One catalog for SMBs, startups, and enterprise custom work — with clear next steps.</p>
           </div>
           <div className='services-grid py'>

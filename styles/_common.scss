@@ -37,13 +37,14 @@
 .secondary-button,
 .button-primary {
   text-transform: capitalize;
-  color: $dark;
+  color: $white;
   padding: 13px 40px;
   background-color: $purple;
   font-size: $md;
   border-radius: 50px;
   box-shadow: $shadow-md;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 .secondary-button {
   background-color: #171e20;
@@ -160,36 +161,47 @@
 .slick-arrow .prev {
   position: absolute;
   top: 45%;
-  width: 50px;
-  height: 50px;
-  background-color: $indigo;
+  width: 44px;
+  height: 44px;
+  background: $gradient2;
   z-index: 1;
   border-radius: 50%;
   @include flex(center, center, none);
   cursor: pointer;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease;
+  border: none;
+  color: $white;
+  box-shadow: 0 8px 20px rgba(255, 45, 149, 0.25);
+
+  &:hover {
+    background: $gradient;
+    transform: scale(1.05);
+  }
 }
 .slick-arrow .next {
-  right: -50px;
+  right: -20px;
 }
 .slick-arrow .prev {
-  left: -50px;
+  left: -20px;
 }
 .slick-slider {
-  margin: 0 -15px;
+  margin: 0 -8px;
+}
+.testimonial .cards,
+.slick-list {
+  overflow: hidden;
 }
 @media screen and (max-width: 800px) {
-  .slick-arrow .next {
-    top: 0;
-    right: 0;
-  }
+  .slick-arrow .next,
   .slick-arrow .prev {
-    top: 0;
-    left: 85%;
+    display: none;
+  }
+  .slick-slider {
+    margin: 0;
   }
   .heading-title {
     max-width: 100%;
-    padding: 50px 0;
+    padding: 40px 0 24px;
   }
 }
 

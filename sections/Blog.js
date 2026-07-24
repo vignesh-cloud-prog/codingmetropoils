@@ -5,15 +5,16 @@ import React from "react"
 const Blog = () => {
   return (
     <>
-      <section className='agency bg-top'>
+      <section className='agency bg-top latest-articles'>
         <div className='container'>
           <div className='heading-title'>
-            <TitleSm title='BLOG' /> <br />
+            <TitleSm title='BLOG' />
             <br />
-            <Title title='Our views on marketing, design & technology' />
+            <br />
+            <Title title='Our views on marketing, design & technology' as='h1' />
           </div>
+          <BlogCard />
         </div>
-        <BlogCard />
       </section>
     </>
   )

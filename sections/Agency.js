@@ -11,7 +11,7 @@ const Agency = () => {
           <div className='heading-title'>
             <TitleSm title='ABOUT CODEMADEBIZ' /> <br />
             <br />
-            <Title title='Complete tech + marketing solutions for SMBs, startups, and enterprise teams' className='title-bg' />
+            <Title title='Complete tech + marketing solutions for SMBs, startups, and enterprise teams' className='title-bg' as='h1' />
           </div>
 
           <div className='content flex1'>
@@ -36,13 +36,13 @@ const Agency = () => {
               </div>
             </div>
             <div className='right w-40 ml'>
-              <img src='/images/s1.jpg' alt='CodeMadeBiz team work' className='round' width='100%' height='100%' />
+              <img src='/images/s1.jpg' alt='CodeMadeBiz digital product work' className='round' width='640' height='480' loading='lazy' decoding='async' />
             </div>
           </div>
 
           <div className='content flex'>
             <div className='left w-40 py'>
-              <img src='/images/s4.jpg' alt='Digital solutions' className='round' width='100%' height='100%' />
+              <img src='/images/s4.jpg' alt='Custom software and marketing solutions' className='round' width='640' height='480' loading='lazy' decoding='async' />
             </div>
             <div className='right w-60 ml'>
               <TitleSm title='Our mission' />

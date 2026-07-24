@@ -1,13 +1,15 @@
 import { Team } from "@/sections"
-import Head from "next/head"
+import { Seo } from "@/components/common/Seo"
 import React from "react"
 
 const team = () => {
   return (
     <>
-      <Head>
-        <title>Team - CodeMadeBiz</title>
-      </Head>
+      <Seo
+        title='Team | CodeMadeBiz'
+        description='Meet the CodeMadeBiz team of builders delivering software, AI, and marketing solutions for SMBs and startups.'
+        path='/team'
+      />
       <Team />
     </>
   )

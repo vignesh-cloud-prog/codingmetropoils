@@ -1,28 +1,36 @@
-import Head from "next/head"
 import Link from "next/link"
 import { Title, TitleSm } from "@/components/common/Title"
 import Banner from "@/components/Banner"
+import { Seo } from "@/components/common/Seo"
 import { mvpPackage, appointmentHref } from "@/assets/data/offers"
 
 const MvpPage = () => {
   return (
     <>
-      <Head>
-        <title>Startup MVP Package - CodeMadeBiz</title>
-        <meta name='description' content={mvpPackage.promise} />
-      </Head>
+      <Seo
+        title='Startup MVP Package | CodeMadeBiz'
+        description={mvpPackage.promise}
+        path='/solutions/mvp'
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: mvpPackage.title,
+          description: mvpPackage.promise,
+          provider: { "@type": "Organization", name: "CodeMadeBiz" },
+        }}
+      />
       <section className='agency bg-top solution-page'>
         <div className='container'>
           <div className='heading-title'>
             <TitleSm title='STARTUP MVP' />
             <br />
             <br />
-            <Title title={mvpPackage.title} className='title-bg' />
+            <Title title={mvpPackage.title} className='title-bg' as='h1' />
             <p>{mvpPackage.promise}</p>
           </div>
 
           <div className='solution-panel'>
-            <TitleSm title='WHAT’S INCLUDED' />
+            <TitleSm title='WHAT’S INCLUDED' as='h2' />
             <ul className='solution-list'>
               {mvpPackage.includes.map((item) => (
                 <li key={item}>{item}</li>
@@ -39,7 +47,7 @@ const MvpPage = () => {
           </div>
 
           <div className='solution-panel'>
-            <TitleSm title='HOW IT WORKS' />
+            <TitleSm title='HOW IT WORKS' as='h2' />
             <div className='offer-grid offer-grid-3'>
               <div className='offer-card'>
                 <h3>1. Discovery</h3>
