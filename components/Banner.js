@@ -1,18 +1,20 @@
-import React from "react"
-import { Title, TitleLogo } from "./common/Title"
 import Link from "next/link"
+import { Title, TitleLogo } from "./common/Title"
+import { appointmentHref } from "@/assets/data/offers"
 
-const Banner = () => {
+const Banner = ({ intent, title, subtitle, cta }) => {
   return (
     <>
-      <section className='banner' style={{marginBottom:40}}>
+      <section className='banner' style={{ marginBottom: 40 }}>
         <div className='container'>
           <div>
-            <Title title='We are looking forward to start a new project' /> <br />
-            <TitleLogo title='Lets take your business to the next level!' />
+            <Title title={title || "Ready to build your software, AI, or growth stack?"} /> <br />
+            <TitleLogo title={subtitle || "Book a consultation — tell us your intent and we will map a plan."} />
           </div>
           <div>
-            <Link href='/appointment' className='button-primary'>Request for quote</Link>
+            <Link href={appointmentHref(intent)} className='button-primary'>
+              {cta || "Book a consultation"}
+            </Link>
           </div>
         </div>
       </section>

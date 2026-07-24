@@ -8,45 +8,45 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 export const home = [
   {
     icon: <BsPersonGear size={25} />,
-    title: "Personalized approach to each client",
+    title: "Built for local SMBs and startups",
   },
   {
     icon: <TfiRulerPencil size={25} />,
-    title: "Unique technologies & modern approach ",
+    title: "Software, AI, and marketing in one stack",
   },
   {
     icon: <MdOutlineVerifiedUser size={25} />,
-    title: "Verified by the best industry experts",
+    title: "Clear plans — Launch, Growth, and Scale",
   },
   {
     icon: <BiUser size={25} />,
-    title: "Customer satisfaction is our top priority",
+    title: "Custom enterprise tools when you outgrow packages",
   },
 ]
 export const expertise = [
   {
     id: 1,
-    title: "Web Design & Development",
-    cover: "../images/e1.jpg",
-    desc: [{ text: "Web design" }, { text: "Web development" }, { text: "Custom icons & illustrations" }, { text: "Hosting" }, { text: "Website audit" }],
+    title: "Websites & CRM",
+    cover: "/images/e1.jpg",
+    desc: [{ text: "Marketing sites" }, { text: "Landing pages" }, { text: "Website + CRM" }, { text: "Lead capture" }, { text: "Booking flows" }],
   },
   {
     id: 2,
-    title: "Digital Marketing",
-    cover: "../images/e2.jpg",
-    desc: [{ text: "Social media marketing" }, { text: "Marketing campaigns" }, { text: "Markting management" }, { text: "SEO" }],
+    title: "AI Growth Stack",
+    cover: "/images/e2.jpg",
+    desc: [{ text: "AI social media" }, { text: "AI sales process" }, { text: "Support agents" }, { text: "Custom workflows" }],
   },
   {
     id: 3,
-    title: "E-Commerce",
-    cover: "../images/e3.jpg",
-    desc: [{ text: "E-Commerce website design" }, { text: "WooCommerce" }, { text: "Content management" }, { text: "Hosting" }],
+    title: "Apps & MVP",
+    cover: "/images/e3.jpg",
+    desc: [{ text: "Startup MVP" }, { text: "Web apps" }, { text: "Cross-platform apps" }, { text: "Admin dashboards" }],
   },
   {
     id: 4,
-    title: "Branding & Creative Services",
-    cover: "../images/e4.jpg",
-    desc: [{ text: "Visual identity" }, { text: "Branding for social media" }, { text: "Custom illustrations" }],
+    title: "Marketing & Enterprise",
+    cover: "/images/e4.jpg",
+    desc: [{ text: "SEO & content" }, { text: "Paid ads" }, { text: "Custom AI tools" }, { text: "Integrations" }],
   },
 ]
 export const testimonial = [

@@ -190,3 +190,303 @@
     }
   }
 }
+
+/* Positioning / offers */
+.hero-cta,
+.offer-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: $xl-6;
+}
+
+.button-primary.secondary-cta {
+  background: transparent;
+  color: $white;
+  border: 1px solid rgba($white, 0.35);
+  box-shadow: none;
+}
+
+.button-primary.secondary-cta:hover {
+  color: $indigo;
+  border-color: $indigo;
+}
+
+.offer-section {
+  padding: $xll 0;
+  position: relative;
+}
+
+.offer-section .heading-title p,
+.agency .heading-title p {
+  margin-top: $xl-4;
+  color: rgba($white, 0.65);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.offer-grid {
+  display: grid;
+  gap: 28px;
+}
+
+.offer-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.offer-grid-offers {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.offer-grid-ai {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.offer-card {
+  border: 1px solid rgba($white, 0.12);
+  border-radius: 30px 0 30px 0;
+  padding: $xl-6;
+  height: 100%;
+  background: rgba($white, 0.02);
+
+  h3 {
+    font-size: $xl-3;
+    font-weight: 500;
+    margin-bottom: $xl-3;
+  }
+
+  p {
+    color: rgba($white, 0.65);
+    line-height: 1.7;
+    margin-bottom: $xl-4;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    color: rgba($white, 0.6);
+    margin-bottom: $xl-2;
+    line-height: 1.5;
+    list-style: disc;
+    margin-left: $xl-4;
+  }
+
+  .button-primary {
+    margin-top: $xl-2;
+  }
+}
+
+.offer-card-link {
+  display: block;
+  color: inherit;
+  transition: 0.3s border-color, 0.3s transform;
+
+  &:hover {
+    border-color: $indigo;
+    transform: translateY(-4px);
+  }
+}
+
+.offer-index {
+  display: block;
+  color: $indigo;
+  letter-spacing: 2px;
+  margin-bottom: $xl-3;
+  font-size: $sm;
+}
+
+.offer-outcome {
+  color: $indigo !important;
+  font-size: $md;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.plan-card {
+  border: 1px solid rgba($white, 0.12);
+  border-radius: 30px 0 30px 0;
+  padding: $xl-6;
+  background: rgba($white, 0.02);
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: $xl-5;
+    font-weight: 500;
+  }
+
+  .plan-tagline {
+    color: $indigo;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: $sm;
+    margin: $sm 0 $xl-3;
+  }
+
+  .plan-best {
+    color: rgba($white, 0.7);
+    margin-bottom: $xl-4;
+    line-height: 1.6;
+  }
+
+  ul {
+    margin: 0 0 $xl-4 $xl-4;
+    flex-grow: 1;
+  }
+
+  li {
+    color: rgba($white, 0.65);
+    margin-bottom: $xl-2;
+    list-style: disc;
+    line-height: 1.5;
+  }
+
+  .button-primary {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+}
+
+.plan-card.featured {
+  border-color: $indigo;
+  box-shadow: 0 0 0 1px rgba($indigo, 0.25);
+}
+
+.plan-badge {
+  display: inline-block;
+  color: $dark;
+  background: $purple;
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-size: $sm;
+  margin-bottom: $xl-3;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.plan-not {
+  margin-bottom: $xl-4;
+
+  span {
+    display: block;
+    color: rgba($white, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: $sm;
+    margin-bottom: $sm;
+  }
+
+  li {
+    opacity: 0.55;
+  }
+}
+
+.plan-addons {
+  margin-top: $xll;
+  text-align: center;
+
+  .addon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: $xl-4;
+  }
+
+  .addon-list span {
+    border: 1px solid rgba($white, 0.15);
+    border-radius: 50px;
+    padding: 10px 18px;
+    color: rgba($white, 0.7);
+    font-size: $sm;
+    letter-spacing: 1px;
+  }
+}
+
+.solution-page {
+  .solution-panel {
+    max-width: 960px;
+    margin: 0 auto $xll;
+  }
+
+  .solution-lead {
+    color: rgba($white, 0.7);
+    font-size: $xl-2;
+    line-height: 1.7;
+    margin-top: $xl-4;
+  }
+
+  .solution-list {
+    margin: $xl-5 0 $xl-5 $xl-5;
+
+    li {
+      color: rgba($white, 0.7);
+      margin-bottom: $xl-3;
+      list-style: disc;
+      line-height: 1.6;
+    }
+  }
+
+  .flow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: $xl-5;
+    font-size: $xl-2;
+    letter-spacing: 1px;
+
+    span {
+      color: rgba($white, 0.75);
+    }
+  }
+}
+
+.intent-chip {
+  margin-top: $xl-4;
+  color: rgba($white, 0.55);
+  letter-spacing: 1px;
+
+  strong {
+    color: $indigo;
+    text-transform: uppercase;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .offer-grid-3,
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero .hero-title {
+    font-size: 48px;
+    line-height: 1.15;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .offer-card,
+  .plan-card {
+    padding: $xl-5;
+    border-radius: 20px 0 20px 0;
+  }
+
+  .hero-cta .button-primary,
+  .offer-actions .button-primary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}

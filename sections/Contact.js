@@ -15,7 +15,21 @@ const Contact = () => {
           <div className='heading-title'>
             <TitleSm title='CONTACT' /> <br />
             <br />
-            <Title title="Let's start right now!" className='title-bg' />
+            <Title title='Tell us what you need — AI, MVP, Website + CRM, or enterprise' className='title-bg' />
+            <div className='offer-actions' style={{ marginTop: 24 }}>
+              <Link href='/appointment?intent=ai' className='button-primary'>
+                Get AI setup
+              </Link>
+              <Link href='/appointment?intent=mvp' className='button-primary secondary-cta'>
+                Build my MVP
+              </Link>
+              <Link href='/appointment?intent=webcrm' className='button-primary secondary-cta'>
+                Website + CRM
+              </Link>
+              <Link href='/appointment?intent=enterprise' className='button-primary secondary-cta'>
+                Enterprise inquiry
+              </Link>
+            </div>
           </div>
           <div className='content py flex1'>
             <div className='left w-30'>

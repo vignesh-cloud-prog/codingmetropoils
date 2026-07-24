@@ -5,7 +5,8 @@ const AgencyPage = () => {
   return (
     <>
       <Head>
-        <title>About Agency</title>
+        <title>About CodeMadeBiz</title>
+        <meta name='description' content='CodeMadeBiz builds software, AI, and marketing solutions for local SMBs and startups — plus custom enterprise tools.' />
       </Head>
       <Agency />
     </>

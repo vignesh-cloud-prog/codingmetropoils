@@ -3,9 +3,15 @@ import Banner from "@/components/Banner"
 import Expertise from "@/components/Expertise"
 import Testimonial from "@/components/Testimonial"
 import TrustPilotReview from "@/components/TrustPilotReview"
+import Audiences from "@/components/Audiences"
+import OfferLines from "@/components/OfferLines"
+import AiServices from "@/components/AiServices"
+import SoftwarePlans from "@/components/SoftwarePlans"
 import { Title, TitleLogo, TitleSm } from "@/components/common/Title"
 import { BlogCard } from "@/components/router"
-import { Products, Services } from "@/sections"
+import { Products } from "@/sections"
+import Link from "next/link"
+import { appointmentHref } from "@/assets/data/offers"
 import React from "react"
 
 const Hero = () => {
@@ -13,23 +19,34 @@ const Hero = () => {
     <>
       <section className='hero'>
         <div className='container'>
-          <TitleLogo title='creative' caption='B-' className='logobg' />
-          <h1 className='hero-title'>WE BUILD DIGITAL EXPERIENCES</h1>
+          <TitleLogo title='Biz' caption='CodeMade' className='logobg' />
+          <h1 className='hero-title'>SOFTWARE, AI & MARKETING FOR SMBs & STARTUPS</h1>
 
           <div className='sub-heading'>
             <TitleSm title='WEBSITES' /> <span>.</span>
             <TitleSm title='APPS' /> <span>.</span>
-            <TitleSm title='AI & ML' /> <span>.</span>
-            <TitleSm title='BRANDING' /> <span>.</span>
-            <TitleSm title='DIGITAL MARKETING' />
+            <TitleSm title='AI AGENTS' /> <span>.</span>
+            <TitleSm title='CRM' /> <span>.</span>
+            <TitleSm title='GROWTH' />
+          </div>
+
+          <div className='hero-cta'>
+            <Link href={appointmentHref()} className='button-primary'>
+              Book a consultation
+            </Link>
+            <Link href='/pricing' className='button-primary secondary-cta'>
+              View plans
+            </Link>
           </div>
         </div>
       </section>
       <section className='hero-sec'>
         <div className='container'>
           <div className='heading-title'>
-            <Title title='The last digital agency you ll ever need' />
-            <p>"Welcome to our world of limitless possibilities! We are your one-stop destination for digital success. From captivating websites that define your online presence to cutting-edge apps that bring your ideas to life, our innovative solutions lead the way. Elevate your brand with our storytelling expertise, and let us drive your growth digitally through strategic digital marketing."</p>
+            <Title title='Complete software, AI, and marketing solutions for local SMBs and startups — plus custom enterprise tools.' />
+            <p>
+              CodeMadeBiz builds and runs the tech stack you need to sell, serve, and scale: websites, apps, AI agents, CRM, and growth systems — with clear plans instead of vague agency promises.
+            </p>
           </div>
           <div className='hero-content grid-4'>
             {home.map((item, i) => (
@@ -42,16 +59,20 @@ const Hero = () => {
           </div>
         </div>
       </section>
+      <Audiences />
+      <OfferLines />
+      <AiServices />
+      <SoftwarePlans />
       <Expertise />
       <Banner />
       <Products />
-      <Services />
       <Testimonial />
       <TrustPilotReview />
       <div className='text-center'>
         <Title title='Latest news & articles' />
       </div>
       <BlogCard />
+      <Banner intent='software' />
     </>
   )
 }

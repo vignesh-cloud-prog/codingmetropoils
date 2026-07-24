@@ -2,8 +2,8 @@ import Link from "next/link"
 import { TitleSm } from "./Title"
 import { HiOutlineArrowRight } from "react-icons/hi"
 
-export const Card = ({ data, caption, show, path }) => {
-  const href = path ? `/${path}/${data.slug || data.id}` : "/contact"
+export const Card = ({ data, caption, show, path, href: hrefProp }) => {
+  const href = hrefProp || (path ? `/${path}/${data.slug || data.id}` : "/contact")
 
   return (
     <>

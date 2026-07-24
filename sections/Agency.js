@@ -9,40 +9,48 @@ const Agency = () => {
       <section className='agency bg-top'>
         <div className='container'>
           <div className='heading-title'>
-            <TitleSm title='ABOUT AGENCY' /> <br />
+            <TitleSm title='ABOUT CODEMADEBIZ' /> <br />
             <br />
-            <Title title='The last digital agency you will ever need!' className='title-bg' />
+            <Title title='Complete tech + marketing solutions for SMBs, startups, and enterprise teams' className='title-bg' />
           </div>
 
-<div className='content flex1'>
-             <div className='left w-60 py'>
-               <TitleSm title='Turning your business ideas into smart digital products since 2001' />
-               <p className='desc-p'>We specialize in creating custom digital solutions that drive real business results. From modern websites and e-commerce platforms to mobile apps and digital marketing strategies, our team combines technical expertise with creative thinking to help businesses thrive in the digital landscape.</p>
-                <div className='grid-3'>
-                  <div className='box'>
-                    <h1 className='indigo'>10+</h1>
-                    <h3>Years of experience</h3>
-                  </div>
-                  <div className='box'>
-                    <h1 className='indigo'>12+</h1>
-                    <h3>Industry awards</h3>
-                  </div>
+          <div className='content flex1'>
+            <div className='left w-60 py'>
+              <TitleSm title='We build and run the software and growth stack local businesses need' />
+              <p className='desc-p'>
+                CodeMadeBiz helps local SMBs and startups sell, serve, and scale with websites, apps, AI agents, CRM dashboards, and marketing systems. When you outgrow packages, we build custom enterprise tools and AI workflows.
+              </p>
+              <div className='grid-3'>
+                <div className='box'>
+                  <h1 className='indigo'>SMB</h1>
+                  <h3>Local service businesses</h3>
                 </div>
+                <div className='box'>
+                  <h1 className='indigo'>MVP</h1>
+                  <h3>Startup product launches</h3>
+                </div>
+                <div className='box'>
+                  <h1 className='indigo'>AI</h1>
+                  <h3>Agents & workflows</h3>
+                </div>
+              </div>
             </div>
             <div className='right w-40 ml'>
-              <img src='/images/s1.jpg' alt='Img' className='round' width='100%' height='100%' />
+              <img src='/images/s1.jpg' alt='CodeMadeBiz team work' className='round' width='100%' height='100%' />
             </div>
           </div>
 
           <div className='content flex'>
             <div className='left w-40 py'>
-              <img src='/images/s4.jpg' alt='Img' className='round' width='100%' height='100%' />
+              <img src='/images/s4.jpg' alt='Digital solutions' className='round' width='100%' height='100%' />
             </div>
-<div className='right w-60 ml'>
-               <TitleSm title='Our mission' />
-               <br />
-               <p className='misson-p'>Our mission is to empower businesses with innovative digital solutions that are not only visually stunning but also highly functional and user-friendly. We believe in building long-term partnerships with our clients, understanding their unique challenges, and delivering measurable results that contribute to their growth and success.</p>
-             </div>
+            <div className='right w-60 ml'>
+              <TitleSm title='Our mission' />
+              <br />
+              <p className='misson-p'>
+                Sell outcomes — more booked appointments, cleaner lead pipelines, and MVPs that reach real users — through clear plans (Launch, Growth, Scale), AI services we build and operate, and custom tools when standard packages are not enough.
+              </p>
+            </div>
           </div>
         </div>
       </section>

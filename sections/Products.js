@@ -81,13 +81,14 @@ const Products = () => {
       <section className='agency bg-top'>
         <div className='container'>
           <div className='heading-title'>
-            <TitleSm title='OUR PRODUCTS' /> <br />
+            <TitleSm title='CASE STUDIES' /> <br />
             <br />
-            <Title title='Innovative Software Solutions' className='title-bg' />
+            <Title title='Proof from SMB, startup, and product builds' className='title-bg' />
+            <p>Selected work that maps to Launch, Growth, Scale, and custom product delivery.</p>
           </div>
           <div className='products-grid py'>
-            {products.map((item) => (
-              <Card data={item} key={item.id} caption={item.post} show={true} />
+            {products.slice(0, 6).map((item) => (
+              <Card data={item} key={item.id} caption={item.post} show={true} href='/appointment?intent=software' />
             ))}
           </div>
         </div>

@@ -3,6 +3,13 @@ import { Title } from "./common/Title"
 import { expertise } from "@/assets/data/dummydata"
 import { Card } from "./common/Card"
 
+const expertiseLinks = {
+  1: "/solutions/website-crm",
+  2: "/ai",
+  3: "/solutions/mvp",
+  4: "/services",
+}
+
 const Expertise = () => {
   return (
     <>
@@ -10,11 +17,13 @@ const Expertise = () => {
         <div className='container'>
           <div className='heading-title'>
             <Title title='Our expertise' />
-            <p>Mastering the latest technologies, we innovate with AI, blockchain, Apps, Websites, and more to create future-proof solutions that empower your business.</p>
+            <p>
+              Complete software, AI, and marketing solutions for local SMBs and startups — plus custom enterprise tools when you need them.
+            </p>
           </div>
           <div className='hero-content grid-4'>
             {expertise.map((item) => (
-              <Card data={item} key={item.id} caption='learn more' />
+              <Card data={item} key={item.id} caption='learn more' href={expertiseLinks[item.id] || "/services"} show={true} />
             ))}
           </div>
         </div>
