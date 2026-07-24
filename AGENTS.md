@@ -42,6 +42,15 @@
 - Next.js Image component not used - standard img tags observed
 - Consider adding lazy loading and optimization for Core Web Vitals
 
+## Performance Recommendations
+- External scripts: Evaluate JotForm iframe impact - consider lazy loading or deferring non-essential scripts
+- Images: Add loading=" lazy" attribute to img tags below the fold
+- Core Web Vitals: 
+  * Optimize CSS delivery (consider critical CSS)
+  * Minimize JavaScript bundle size
+  * Leverage browser caching for static assets
+  * Consider using next/script component for third-party scripts
+
 ## Dependency Updates
 - Current Next.js version is 13.3.0 (latest is 16.2.11)
 - Consider updating dependencies but test thoroughly as this is a major version jump
